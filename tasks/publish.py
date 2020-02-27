@@ -15,6 +15,7 @@ if __name__ == '__main__':
     from models.user import User
     from models.product import Product
     from models.payment import Payment
+    from models.payment_task import PaymentTask
 
     DB_URL = os.getenv('DB_URL')
     engine = create_engine(DB_URL)
@@ -39,6 +40,19 @@ if __name__ == '__main__':
                     ammount=random.choice(dice)
                 )
             )
+            progress_bar.update(1)
+
+        session.commit()
+
+    with tqdm(total=iters) as progress_bar:
+        for payment in session.query(Payment).all():
+            payment_task = PaymentTask(
+                user_id=payment.user_id,
+                payment_id=payment.id,
+                tries_left=5,
+                processing=False
+            )
+            session.add(payment_task)
             progress_bar.update(1)
 
         session.commit()

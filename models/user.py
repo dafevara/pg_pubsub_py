@@ -3,7 +3,8 @@ from datetime import timedelta
 from sqlalchemy import create_engine
 from sqlalchemy import Column
 from sqlalchemy import DateTime
-from sqlalchemy import Integer, String, Boolean, Float, JSON
+from sqlalchemy import Integer, String, Boolean, Float, JSON, ForeignKey
+from sqlalchemy.orm import relationship
 from models import Base
 
 class User(Base):
@@ -13,6 +14,9 @@ class User(Base):
     last_name = Column(String)
     email = Column(String)
     balance = Column(Integer)
+
+    payments = relationship('Payment', back_populates='user')
+    payment_tasks = relationship('PaymentTask', back_populates='user')
 
     def __repr__(self):
         return "%s(id=%s, fname=%s, lname=%s, email=%s, balance=%s)" % (

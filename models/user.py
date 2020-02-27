@@ -15,7 +15,7 @@ class User(Base):
     balance = Column(Integer)
 
     def __repr__(self):
-        return "%s(id=%s, name=%s, last_name=%s, email=%s, balance=%s)" % (
+        return "%s(id=%s, fname=%s, lname=%s, email=%s, balance=%s)" % (
             self.__class__.__name__,
             self.id,
             self.first_name,
@@ -23,4 +23,3 @@ class User(Base):
             self.email,
             self.balance
         )
-

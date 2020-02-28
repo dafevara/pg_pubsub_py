@@ -22,17 +22,19 @@ if __name__ == '__main__':
     from models.payment_task import PaymentTask
 
     while True:
+        print('waiting ...')
         task = PaymentTask.next()
 
         if not task:
             time.sleep(1)
-        else:
-            try:
-                print('-')
-                task.perform()
-            except Exception as ex:
-                task.failed(str(ex))
+            continue
 
-            if task.error is None or task.error == '':
-                print('completed!')
-                task.destroy()
+        try:
+            print('-')
+            task.perform()
+        except Exception as ex:
+            task.failed(str(ex))
+
+        if task.error is None or task.error == '':
+            print('completed!')
+            task.destroy()

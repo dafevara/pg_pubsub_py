@@ -12,6 +12,8 @@ if __name__ == '__main__':
 
     from models.user import User
     from models.product import Product
+    from models.payment import Payment
+    from models.payment_task import PaymentTask
 
     DB_URL = os.getenv('DB_URL')
     engine = create_engine(DB_URL)

@@ -1,0 +1,12 @@
+node_modules
+.DS_Store
+dist/**
+.env
+logs
+*.pyc
+gunicorn.py
+tags
+data/**
+.ruby*
+.vscode/*
+._glove_spacy
